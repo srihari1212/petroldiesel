@@ -57,7 +57,7 @@ def insert():
         db.child(today).child(each[0]).update({"diesel":each[1]})
     return True
 
-@sched.scheduled_job('interval', minutes = 0.5)
+@sched.scheduled_job('interval', hours = 24)
 def initiate():
     var = insert()
     if var:
