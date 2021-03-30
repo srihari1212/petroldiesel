@@ -6,7 +6,7 @@ import apscheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
 sched = BlockingScheduler()
 
-today = date.today()
+
 
 config = {
     "apiKey": "AIzaSyAJDxFPg_oQHvQnUsAF_t9ytSqjU1YuhBU",
@@ -48,7 +48,7 @@ def data(petrolurl):
 petrolurl = "https://www.goodreturns.in/petrol-price.html"
 dieselurl = "https://www.goodreturns.in/diesel-price.html"
 
-def insert():
+def insert(today):
     petroldata = data(petrolurl)
     dieseldata = data(dieselurl)
     for each in petroldata:
@@ -59,7 +59,8 @@ def insert():
 
 @sched.scheduled_job('interval', hours = 24)
 def initiate():
-    var = insert()
+    today = date.today()
+    var = insert(today)
     if var:
         print('success')
 sched.start()
