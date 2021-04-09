@@ -60,7 +60,8 @@ def insert(today):
 @sched.scheduled_job('interval', seconds = 10)
 def initiate():
     today = date.today()
+    day = str(today)
     var = insert(today)
     if var:
-        print('success'+today)
+        print('success'+day)
 sched.start()
