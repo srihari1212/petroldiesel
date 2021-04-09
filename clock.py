@@ -47,17 +47,22 @@ def data(petrolurl):
     return reqnew
 petrolurl = "https://www.goodreturns.in/petrol-price.html"
 dieselurl = "https://www.goodreturns.in/diesel-price.html"
+lpgurl = "https://www.goodreturns.in/lpg-price.html"
+
 
 def insert(today):
     petroldata = data(petrolurl)
     dieseldata = data(dieselurl)
+    lpgdata = data(lpgurl)
     for each in petroldata:
         db.child(today).child(each[0]).update({"petrol":each[1]})
     for each in dieseldata:
         db.child(today).child(each[0]).update({"diesel":each[1]})
+    for each in lpgdata:
+        db.child(today).child(each[0]).update({"lpg":each[1]})
     return True
 
-@sched.scheduled_job('interval', hours = 10)
+@sched.scheduled_job('interval', seconds = 10)
 def initiate():
     today = date.today()
     day = str(today)
