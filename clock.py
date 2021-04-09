@@ -62,5 +62,5 @@ def initiate():
     today = date.today()
     var = insert(today)
     if var:
-        print('success')
+        print('success'+today)
 sched.start()
