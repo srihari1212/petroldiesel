@@ -62,7 +62,7 @@ def insert(today):
         db.child(today).child(each[0]).update({"lpg":each[1]})
     return True
 
-@sched.scheduled_job('interval', seconds = 10)
+@sched.scheduled_job('interval', hours = 10)
 def initiate():
     today = date.today()
     day = str(today)
